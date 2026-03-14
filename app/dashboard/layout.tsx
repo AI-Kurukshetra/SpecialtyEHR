@@ -4,6 +4,7 @@ import { Settings } from "lucide-react";
 import { signOut } from "@/app/(auth)/login/actions";
 import { Button } from "@/components/ui/button";
 import { DashboardNavigation } from "@/components/dashboard/navigation";
+import { hasPermission, type AppPermission } from "@/lib/auth/permissions";
 import { requireDashboardUser } from "@/services/dashboard";
 
 const roleFrameStyles = {
@@ -13,13 +14,29 @@ const roleFrameStyles = {
   receptionist: "bg-[linear-gradient(180deg,hsl(40_90%_95%),hsl(0_0%_100%))]"
 } as const;
 
+const navigationPermissionMap: Array<{ href: string; permission: AppPermission }> = [
+  { href: "/dashboard", permission: "dashboard.read" },
+  { href: "/dashboard/patients", permission: "patients.read" },
+  { href: "/dashboard/appointments", permission: "appointments.read" },
+  { href: "/dashboard/clinical", permission: "clinical.read" },
+  { href: "/dashboard/imaging", permission: "clinical.read" },
+  { href: "/dashboard/billing", permission: "billing.read" },
+  { href: "/dashboard/reports", permission: "reports.read" },
+  { href: "/dashboard/integrations", permission: "integrations.read" },
+  { href: "/dashboard/admin", permission: "admin.manage" },
+  { href: "/portal", permission: "dashboard.read" }
+];
+
 export default async function DashboardLayout({ children }: { children: ReactNode }) {
   const { user, profile, role } = await requireDashboardUser();
+  const allowedHrefs = navigationPermissionMap
+    .filter((item) => hasPermission(role, item.permission))
+    .map((item) => item.href);
 
   return (
     <div className={`min-h-screen ${roleFrameStyles[role]} pb-20 md:pb-0`}>
       <div className="mx-auto grid min-h-screen w-full max-w-7xl gap-4 px-3 py-3 md:grid-cols-[250px_1fr] md:px-4 md:py-4">
-        <DashboardNavigation role={role} />
+        <DashboardNavigation role={role} allowedHrefs={allowedHrefs} />
 
         <div className="space-y-4">
           <header className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border bg-white/85 px-4 py-3 shadow-sm backdrop-blur">

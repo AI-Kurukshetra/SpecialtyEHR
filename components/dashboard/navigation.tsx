@@ -15,29 +15,29 @@ import {
   Users
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { hasPermission, type AppRole, type AppPermission } from "@/lib/auth/permissions";
 
 type NavItem = {
   href: string;
   label: string;
   icon: React.ComponentType<{ className?: string }>;
-  permission: AppPermission;
 };
 
 const navItems: NavItem[] = [
-  { href: "/dashboard", label: "Overview", icon: LayoutDashboard, permission: "dashboard.read" },
-  { href: "/dashboard/patients", label: "Patients", icon: Users, permission: "patients.read" },
-  { href: "/dashboard/appointments", label: "Appointments", icon: CalendarRange, permission: "appointments.read" },
-  { href: "/dashboard/clinical", label: "Clinical", icon: FileText, permission: "clinical.read" },
-  { href: "/dashboard/imaging", label: "Imaging", icon: Activity, permission: "clinical.read" },
-  { href: "/dashboard/billing", label: "Billing", icon: Receipt, permission: "billing.read" },
-  { href: "/dashboard/reports", label: "Reports", icon: ChartNoAxesCombined, permission: "reports.read" },
-  { href: "/dashboard/integrations", label: "Integrations", icon: FolderKanban, permission: "integrations.read" },
-  { href: "/dashboard/admin", label: "Admin", icon: ShieldCheck, permission: "admin.manage" },
-  { href: "/portal", label: "Patient Portal", icon: MonitorSmartphone, permission: "dashboard.read" }
+  { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
+  { href: "/dashboard/patients", label: "Patients", icon: Users },
+  { href: "/dashboard/appointments", label: "Appointments", icon: CalendarRange },
+  { href: "/dashboard/clinical", label: "Clinical", icon: FileText },
+  { href: "/dashboard/imaging", label: "Imaging", icon: Activity },
+  { href: "/dashboard/billing", label: "Billing", icon: Receipt },
+  { href: "/dashboard/reports", label: "Reports", icon: ChartNoAxesCombined },
+  { href: "/dashboard/integrations", label: "Integrations", icon: FolderKanban },
+  { href: "/dashboard/admin", label: "Admin", icon: ShieldCheck },
+  { href: "/portal", label: "Patient Portal", icon: MonitorSmartphone }
 ];
 
-const roleTheme: Record<AppRole, { name: string; sidebarTint: string; activeTab: string; iconTint: string }> = {
+type Role = "admin" | "doctor" | "nurse" | "receptionist";
+
+const roleTheme: Record<Role, { name: string; sidebarTint: string; activeTab: string; iconTint: string }> = {
   admin: {
     name: "Admin Control",
     sidebarTint: "from-cyan-50 to-sky-100",
@@ -69,10 +69,10 @@ function isActivePath(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function DashboardNavigation({ role }: { role: AppRole }) {
+export function DashboardNavigation({ role, allowedHrefs }: { role: Role; allowedHrefs: string[] }) {
   const pathname = usePathname();
   const theme = roleTheme[role];
-  const allowedItems = navItems.filter((item) => hasPermission(role, item.permission));
+  const allowedItems = navItems.filter((item) => allowedHrefs.includes(item.href));
   const mobileItems = allowedItems.slice(0, 5);
 
   return (
