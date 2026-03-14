@@ -1,0 +1,321 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 212 67% 98%;
+  --foreground: 216 46% 16%;
+  --card: 0 0% 100%;
+  --card-foreground: 216 46% 16%;
+  --primary: 192 90% 39%;
+  --primary-foreground: 210 40% 98%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 217 19% 37%;
+  --border: 210 37% 88%;
+  --input: 210 37% 88%;
+  --ring: 192 90% 39%;
+  --radius: 0.8rem;
+}
+
+* {
+  @apply border-border;
+}
+
+body {
+  @apply bg-background text-foreground antialiased;
+  font-family: var(--font-body), sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading), sans-serif;
+}
+
+.landing-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 700px at 90% -15%, hsl(192 90% 39% / 0.2), transparent 60%),
+    radial-gradient(900px 520px at -15% 20%, hsl(212 92% 36% / 0.18), transparent 55%),
+    linear-gradient(180deg, hsl(210 52% 96%), hsl(205 55% 98%));
+}
+
+.landing-hero-title {
+  font-size: clamp(2rem, 4vw, 4.1rem);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: hsl(218 48% 13%);
+}
+
+.landing-hero-copy {
+  font-size: clamp(1rem, 1.9vw, 1.25rem);
+  line-height: 1.7;
+  color: hsl(214 28% 28%);
+}
+
+.landing-primary-btn {
+  background: linear-gradient(92deg, hsl(199 89% 43%), hsl(215 91% 44%));
+  color: hsl(210 40% 98%);
+  border: 0;
+}
+
+.landing-primary-btn:hover {
+  filter: brightness(1.05);
+}
+
+.landing-secondary-btn {
+  border-color: hsl(203 36% 72%);
+  background: hsl(0 0% 100% / 0.6);
+  color: hsl(216 34% 22%);
+}
+
+.landing-secondary-btn:hover {
+  background: hsl(0 0% 100% / 0.9);
+}
+
+.landing-stat-card {
+  border-radius: 1rem;
+  border: 1px solid hsl(0 0% 100% / 0.3);
+  background: hsl(0 0% 100% / 0.45);
+  padding: 1rem;
+  backdrop-filter: blur(12px);
+}
+
+.landing-stat-value {
+  margin-bottom: 0.25rem;
+  font-family: var(--font-heading), sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: hsl(217 56% 21%);
+}
+
+.landing-stat-label {
+  font-size: 0.9rem;
+  color: hsl(217 24% 37%);
+}
+
+.landing-card,
+.landing-panel,
+.landing-split-panel,
+.landing-cta {
+  border-radius: 1rem;
+  border: 1px solid hsl(0 0% 100% / 0.75);
+  background: hsl(0 0% 100% / 0.78);
+  backdrop-filter: blur(10px);
+}
+
+.landing-card {
+  padding: 1.25rem;
+}
+
+.landing-card-title {
+  margin-bottom: 0.35rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: hsl(217 44% 16%);
+}
+
+.landing-card-copy,
+.landing-panel-copy,
+.landing-muted {
+  color: hsl(216 20% 32%);
+  line-height: 1.7;
+}
+
+.landing-section-title {
+  font-size: clamp(1.45rem, 2vw, 2rem);
+  letter-spacing: -0.015em;
+  color: hsl(217 44% 16%);
+}
+
+.landing-panel {
+  padding: 1.2rem;
+}
+
+.landing-panel-title {
+  margin-bottom: 0.25rem;
+  font-weight: 700;
+  color: hsl(217 44% 16%);
+}
+
+.landing-icon-wrap {
+  display: inline-flex;
+  height: 2rem;
+  width: 2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: hsl(192 90% 39% / 0.12);
+}
+
+.landing-split-panel {
+  display: grid;
+  gap: 1.5rem;
+  padding: 1.35rem;
+}
+
+.landing-list-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-radius: 0.8rem;
+  border: 1px solid hsl(203 39% 88%);
+  background: hsl(0 0% 100% / 0.7);
+  padding: 0.8rem 0.9rem;
+  color: hsl(216 33% 23%);
+}
+
+.landing-cta {
+  padding: 1.6rem;
+}
+
+.landing-glow {
+  pointer-events: none;
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+}
+
+.landing-glow-top {
+  top: -90px;
+  right: -120px;
+  height: 250px;
+  width: 250px;
+  background: hsl(189 92% 56% / 0.35);
+}
+
+.landing-glow-bottom {
+  bottom: -110px;
+  left: -100px;
+  height: 220px;
+  width: 220px;
+  background: hsl(213 95% 55% / 0.24);
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 480ms ease-out both;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .landing-split-panel {
+    grid-template-columns: 1.1fr 1fr;
+    align-items: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up {
+    animation: none;
+  }
+}
+
+.auth-shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(860px 440px at 90% 10%, hsl(194 90% 41% / 0.14), transparent 60%),
+    radial-gradient(820px 420px at 10% 80%, hsl(216 90% 47% / 0.12), transparent 58%),
+    linear-gradient(180deg, hsl(210 60% 97%), hsl(0 0% 100%));
+}
+
+.auth-panel {
+  border-radius: 1.2rem;
+  border: 1px solid hsl(0 0% 100% / 0.8);
+  background: hsl(0 0% 100% / 0.62);
+  padding: 1.5rem;
+  backdrop-filter: blur(12px);
+}
+
+.auth-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  border: 1px solid hsl(203 36% 74%);
+  background: hsl(203 76% 97%);
+  padding: 0.35rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: hsl(216 38% 28%);
+}
+
+.auth-title {
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: hsl(218 48% 14%);
+}
+
+.auth-subtitle {
+  max-width: 50ch;
+  color: hsl(216 20% 33%);
+  line-height: 1.7;
+}
+
+.auth-feature {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-radius: 0.8rem;
+  border: 1px solid hsl(206 34% 87%);
+  background: hsl(0 0% 100% / 0.82);
+  padding: 0.75rem 0.85rem;
+  color: hsl(216 32% 24%);
+}
+
+.auth-card {
+  border: 1px solid hsl(0 0% 100% / 0.8);
+  background: hsl(0 0% 100% / 0.87);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 22px 48px -28px hsl(217 48% 27% / 0.38);
+}
+
+.auth-submit {
+  background: linear-gradient(90deg, hsl(195 89% 43%), hsl(217 88% 45%));
+  color: hsl(210 40% 98%);
+}
+
+.auth-submit:hover {
+  filter: brightness(1.05);
+}
+
+.auth-error,
+.auth-success {
+  border-radius: 0.65rem;
+  border: 1px solid;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.auth-error {
+  border-color: hsl(0 80% 82%);
+  background: hsl(0 100% 98%);
+  color: hsl(0 58% 35%);
+}
+
+.auth-success {
+  border-color: hsl(154 52% 78%);
+  background: hsl(152 53% 97%);
+  color: hsl(155 49% 30%);
+}
+
+@media (min-width: 1024px) {
+  .auth-panel {
+    padding: 2rem;
+  }
+}
