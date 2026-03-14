@@ -70,7 +70,6 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
                   <option value="doctor">Doctor</option>
                   <option value="nurse">Nurse</option>
                   <option value="receptionist">Receptionist</option>
-                  <option value="admin">Admin</option>
                 </select>
               </div>
               <div className="space-y-2">

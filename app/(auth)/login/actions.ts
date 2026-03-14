@@ -43,7 +43,9 @@ export async function signUp(formData: FormData) {
   const email = String(formData.get("email") ?? "");
   const password = String(formData.get("password") ?? "");
   const fullName = String(formData.get("full_name") ?? "");
-  const role = String(formData.get("role") ?? "receptionist");
+  const requestedRole = String(formData.get("role") ?? "receptionist");
+  const allowedSignupRoles = new Set(["doctor", "nurse", "receptionist"]);
+  const role = allowedSignupRoles.has(requestedRole) ? requestedRole : "receptionist";
   const supabase = await createClient();
   const origin = (await headers()).get("origin");
 
