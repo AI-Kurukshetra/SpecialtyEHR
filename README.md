@@ -37,6 +37,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=...
    - `supabase/migrations/0007_seed_healthcare_core_entities.sql`
    - `supabase/migrations/0008_seed_role_accounts.sql`
    - `supabase/migrations/0009_core_features_templates_and_rls.sql`
+   - `supabase/migrations/0010_medical_imaging_storage.sql`
 
 The second migration creates specialty EHR module tables and inserts realistic demo data so the dashboard is immediately presentable.
 The third migration adds role-based authentication support (`doctor`, `nurse`, `receptionist`, `admin`).
@@ -49,7 +50,24 @@ npm run dev
 
 Open `http://localhost:3000`.
 
-## 4) Deploy on Vercel
+## 4) Generate Demo Video
+
+1. Keep the app running (`npm run dev`) on `http://127.0.0.1:3000` (or set `DEMO_BASE_URL`).
+2. Run:
+
+```bash
+DEMO_EMAIL=admin1.demo@aurorahealth.app DEMO_PASSWORD='your-password' npm run demo:video
+```
+
+The generated file is saved under `demos/videos/<timestamp>/nextech-ehr-demo.webm`.
+
+Optional MP4 conversion:
+
+```bash
+ffmpeg -i demos/videos/<timestamp>/nextech-ehr-demo.webm -c:v libx264 -pix_fmt yuv420p demos/videos/<timestamp>/nextech-ehr-demo.mp4
+```
+
+## 5) Deploy on Vercel
 
 1. Push repo to GitHub.
 2. Import project in Vercel.
