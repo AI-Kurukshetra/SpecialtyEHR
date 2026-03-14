@@ -1,9 +1,7 @@
-import Link from "next/link";
 import type { ReactNode } from "react";
-import { Settings } from "lucide-react";
 import { signOut } from "@/app/(auth)/login/actions";
 import { DashboardNavigation } from "@/components/dashboard/navigation";
-import { SignOutForm } from "@/components/dashboard/signout-form";
+import { ProfileMenu } from "@/components/dashboard/profile-menu";
 import { hasPermission, type AppPermission } from "@/lib/auth/permissions";
 import { requireDashboardUser } from "@/services/dashboard";
 
@@ -45,16 +43,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
               <p className="text-sm font-medium text-foreground">{profile?.full_name || "Care Team Member"}</p>
               <p className="text-xs text-muted-foreground">{user.email} • Dermatology Operations</p>
             </div>
-            <div className="flex items-center gap-2">
-              <Link href="/portal" className="inline-flex items-center gap-1 rounded-md border px-3 py-2 text-sm hover:bg-muted">
-                Portal
-              </Link>
-              <Link href="/" className="inline-flex items-center gap-1 rounded-md border px-3 py-2 text-sm hover:bg-muted">
-                <Settings className="h-4 w-4" />
-                Home
-              </Link>
-              <SignOutForm action={signOut} />
-            </div>
+            <ProfileMenu action={signOut} />
           </header>
           {children}
         </div>
