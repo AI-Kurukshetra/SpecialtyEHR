@@ -3,22 +3,52 @@ export type AppRole = "doctor" | "nurse" | "receptionist" | "admin";
 export type AppPermission =
   | "dashboard.read"
   | "patients.read"
+  | "patients.write"
   | "appointments.read"
+  | "appointments.write"
   | "clinical.read"
+  | "clinical.write"
   | "billing.read"
   | "reports.read"
   | "integrations.read"
   | "admin.manage";
 
 const rolePermissions: Record<AppRole, AppPermission[]> = {
-  doctor: ["dashboard.read", "patients.read", "appointments.read", "clinical.read", "reports.read"],
-  nurse: ["dashboard.read", "patients.read", "appointments.read", "clinical.read"],
-  receptionist: ["dashboard.read", "patients.read", "appointments.read", "billing.read"],
+  doctor: [
+    "dashboard.read",
+    "patients.read",
+    "patients.write",
+    "appointments.read",
+    "appointments.write",
+    "clinical.read",
+    "clinical.write",
+    "reports.read"
+  ],
+  nurse: [
+    "dashboard.read",
+    "patients.read",
+    "patients.write",
+    "appointments.read",
+    "appointments.write",
+    "clinical.read",
+    "clinical.write"
+  ],
+  receptionist: [
+    "dashboard.read",
+    "patients.read",
+    "patients.write",
+    "appointments.read",
+    "appointments.write",
+    "billing.read"
+  ],
   admin: [
     "dashboard.read",
     "patients.read",
+    "patients.write",
     "appointments.read",
+    "appointments.write",
     "clinical.read",
+    "clinical.write",
     "billing.read",
     "reports.read",
     "integrations.read",
@@ -63,6 +93,11 @@ const routePermissionRules: Array<{ prefix: string; permission: AppPermission }>
   { prefix: "/dashboard/admin", permission: "admin.manage" },
   { prefix: "/api/patients", permission: "patients.read" },
   { prefix: "/api/appointments", permission: "appointments.read" },
+  { prefix: "/api/schedules", permission: "appointments.read" },
+  { prefix: "/api/availability", permission: "appointments.read" },
+  { prefix: "/api/slot-types", permission: "appointments.read" },
+  { prefix: "/api/templates", permission: "clinical.read" },
+  { prefix: "/api/clinical-notes", permission: "clinical.read" },
   { prefix: "/api/procedures", permission: "clinical.read" },
   { prefix: "/api/prescriptions", permission: "clinical.read" },
   { prefix: "/api/imaging", permission: "clinical.read" },

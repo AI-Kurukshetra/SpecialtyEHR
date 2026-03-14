@@ -36,6 +36,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=...
    - `supabase/migrations/0006_healthcare_core_entities.sql`
    - `supabase/migrations/0007_seed_healthcare_core_entities.sql`
    - `supabase/migrations/0008_seed_role_accounts.sql`
+   - `supabase/migrations/0009_core_features_templates_and_rls.sql`
 
 The second migration creates specialty EHR module tables and inserts realistic demo data so the dashboard is immediately presentable.
 The third migration adds role-based authentication support (`doctor`, `nurse`, `receptionist`, `admin`).
