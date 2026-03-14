@@ -63,6 +63,7 @@ const activityLogs = [
 
 export default async function AdminDashboardPage() {
   await requirePermission("admin.manage");
+  const maxWeeklyActiveUsers = Math.max(...weeklyActiveUsers);
 
   return (
     <main className="space-y-4 pb-8">
@@ -117,10 +118,18 @@ export default async function AdminDashboardPage() {
                 <CardDescription>Usage trend across clinics</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="flex h-40 items-end gap-2 rounded-xl border bg-muted/20 p-3">
+                <div className="mb-2 flex items-center justify-between text-xs text-muted-foreground">
+                  <span>Last 7 days</span>
+                  <span>Peak: {maxWeeklyActiveUsers}</span>
+                </div>
+                <div className="flex h-44 items-end gap-2 rounded-xl border bg-muted/20 p-3">
                   {weeklyActiveUsers.map((value, idx) => (
                     <div key={`${value}-${idx}`} className="flex flex-1 flex-col items-center gap-2">
-                      <div className="w-full rounded-md bg-primary/85" style={{ height: `${Math.max(value, 14)}%` }} />
+                      <span className="text-[10px] font-semibold text-muted-foreground">{value}</span>
+                      <div
+                        className="w-full min-h-[10px] rounded-md bg-[hsl(var(--primary))]"
+                        style={{ height: `${Math.max(Math.round((value / maxWeeklyActiveUsers) * 100), 12)}%` }}
+                      />
                       <span className="text-[11px] text-muted-foreground">D{idx + 1}</span>
                     </div>
                   ))}
