@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { ArrowRight, ShieldCheck, Sparkles } from "lucide-react";
+import { ShieldCheck, Sparkles } from "lucide-react";
 import { signUp } from "../login/actions";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { FormSubmitButton } from "@/components/ui/form-submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -81,10 +81,13 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
                 <Label htmlFor="password">Password</Label>
                 <Input id="password" name="password" type="password" required minLength={6} placeholder="At least 6 characters" />
               </div>
-              <Button type="submit" formAction={signUp} className="auth-submit w-full">
-                Create account
-                <ArrowRight className="h-4 w-4" />
-              </Button>
+              <FormSubmitButton
+                type="submit"
+                formAction={signUp}
+                className="auth-submit w-full"
+                idleLabel="Create account"
+                loadingLabel="Creating account..."
+              />
             </form>
             <p className="text-sm text-muted-foreground">
               Already have an account?{" "}

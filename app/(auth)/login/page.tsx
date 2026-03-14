@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { signIn } from "./actions";
-import { Button } from "@/components/ui/button";
+import { FormSubmitButton } from "@/components/ui/form-submit-button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ArrowRight, ShieldCheck, Stethoscope } from "lucide-react";
+import { ShieldCheck, Stethoscope } from "lucide-react";
 
 type LoginPageProps = {
   searchParams: Promise<{
@@ -65,10 +65,13 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
                 <Label htmlFor="password">Password</Label>
                 <Input id="password" name="password" type="password" required minLength={6} placeholder="At least 6 characters" />
               </div>
-              <Button type="submit" formAction={signIn} className="auth-submit w-full">
-                Sign in
-                <ArrowRight className="h-4 w-4" />
-              </Button>
+              <FormSubmitButton
+                type="submit"
+                formAction={signIn}
+                className="auth-submit w-full"
+                idleLabel="Sign in"
+                loadingLabel="Signing in..."
+              />
             </form>
             <p className="text-sm text-muted-foreground">
               <Link href="/forgot-password" className="font-semibold text-primary underline-offset-4 hover:underline">

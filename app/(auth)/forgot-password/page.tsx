@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { KeyRound } from "lucide-react";
 import { requestPasswordReset } from "@/app/(auth)/login/actions";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { FormSubmitButton } from "@/components/ui/form-submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -35,9 +35,13 @@ export default async function ForgotPasswordPage({ searchParams }: ForgotPasswor
                 <Label htmlFor="email">Work email</Label>
                 <Input id="email" name="email" type="email" required placeholder="you@clinic.com" />
               </div>
-              <Button type="submit" formAction={requestPasswordReset} className="auth-submit w-full">
-                Send reset link
-              </Button>
+              <FormSubmitButton
+                type="submit"
+                formAction={requestPasswordReset}
+                className="auth-submit w-full"
+                idleLabel="Send reset link"
+                loadingLabel="Sending..."
+              />
             </form>
             <p className="text-sm text-muted-foreground">
               Back to{" "}

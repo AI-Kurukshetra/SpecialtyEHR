@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { updatePassword } from "@/app/(auth)/login/actions";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { FormSubmitButton } from "@/components/ui/form-submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -35,9 +35,13 @@ export default async function ResetPasswordPage({ searchParams }: ResetPasswordP
                 <Label htmlFor="confirm_password">Confirm password</Label>
                 <Input id="confirm_password" name="confirm_password" type="password" required minLength={6} />
               </div>
-              <Button type="submit" formAction={updatePassword} className="auth-submit w-full">
-                Update password
-              </Button>
+              <FormSubmitButton
+                type="submit"
+                formAction={updatePassword}
+                className="auth-submit w-full"
+                idleLabel="Update password"
+                loadingLabel="Updating..."
+              />
             </form>
             <p className="text-sm text-muted-foreground">
               Back to{" "}

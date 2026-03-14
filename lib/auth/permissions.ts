@@ -86,6 +86,7 @@ const routePermissionRules: Array<{ prefix: string; permission: AppPermission }>
   { prefix: "/dashboard/patients", permission: "patients.read" },
   { prefix: "/dashboard/appointments", permission: "appointments.read" },
   { prefix: "/dashboard/clinical", permission: "clinical.read" },
+  { prefix: "/dashboard/templates", permission: "clinical.read" },
   { prefix: "/dashboard/imaging", permission: "clinical.read" },
   { prefix: "/dashboard/billing", permission: "billing.read" },
   { prefix: "/dashboard/reports", permission: "reports.read" },

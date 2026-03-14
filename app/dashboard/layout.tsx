@@ -2,8 +2,8 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { Settings } from "lucide-react";
 import { signOut } from "@/app/(auth)/login/actions";
-import { Button } from "@/components/ui/button";
 import { DashboardNavigation } from "@/components/dashboard/navigation";
+import { SignOutForm } from "@/components/dashboard/signout-form";
 import { hasPermission, type AppPermission } from "@/lib/auth/permissions";
 import { requireDashboardUser } from "@/services/dashboard";
 
@@ -19,6 +19,7 @@ const navigationPermissionMap: Array<{ href: string; permission: AppPermission }
   { href: "/dashboard/patients", permission: "patients.read" },
   { href: "/dashboard/appointments", permission: "appointments.read" },
   { href: "/dashboard/clinical", permission: "clinical.read" },
+  { href: "/dashboard/templates", permission: "clinical.read" },
   { href: "/dashboard/imaging", permission: "clinical.read" },
   { href: "/dashboard/billing", permission: "billing.read" },
   { href: "/dashboard/reports", permission: "reports.read" },
@@ -52,11 +53,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
                 <Settings className="h-4 w-4" />
                 Home
               </Link>
-              <form action={signOut}>
-                <Button type="submit" variant="outline">
-                  Sign out
-                </Button>
-              </form>
+              <SignOutForm action={signOut} />
             </div>
           </header>
           {children}

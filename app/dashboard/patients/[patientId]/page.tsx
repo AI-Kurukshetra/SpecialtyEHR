@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
+import { InsuranceManager } from "@/components/dashboard/insurance-manager";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { requirePermission } from "@/lib/auth/guards";
 import { formatDateTime } from "@/services/dashboard";
@@ -71,6 +72,9 @@ export default async function PatientProfilePage({ params, searchParams }: Patie
             <p>Group #: {patient.insuranceGroupNumber || "Not provided"}</p>
             <p>Policy holder: {patient.insurancePolicyHolder || "Not provided"}</p>
             <p>Verification: {patient.insuranceVerified ? "Verified" : "Pending"}</p>
+            <div className="pt-3">
+              <InsuranceManager patientId={patientId} />
+            </div>
           </CardContent>
         </Card>
       </section>

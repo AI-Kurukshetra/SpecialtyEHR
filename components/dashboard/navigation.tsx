@@ -27,6 +27,7 @@ const navItems: NavItem[] = [
   { href: "/dashboard/patients", label: "Patients", icon: Users },
   { href: "/dashboard/appointments", label: "Appointments", icon: CalendarRange },
   { href: "/dashboard/clinical", label: "Clinical", icon: FileText },
+  { href: "/dashboard/templates", label: "Templates", icon: FileText },
   { href: "/dashboard/imaging", label: "Imaging", icon: Activity },
   { href: "/dashboard/billing", label: "Billing", icon: Receipt },
   { href: "/dashboard/reports", label: "Reports", icon: ChartNoAxesCombined },
