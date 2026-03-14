@@ -112,10 +112,6 @@ export function DashboardNavigation({ role, allowedHrefs }: { role: Role; allowe
             );
           })}
         </nav>
-        <div className="mt-6 rounded-xl border bg-white/70 p-3 text-xs text-muted-foreground">
-          <p className="font-semibold text-foreground">Role-based view</p>
-          <p className="mt-1">Tabs shown here are filtered by your current permissions.</p>
-        </div>
       </aside>
 
       <nav className="fixed inset-x-0 bottom-0 z-40 border-t bg-white/95 px-2 py-2 backdrop-blur md:hidden">
