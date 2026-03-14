@@ -85,7 +85,12 @@ export function DashboardNavigation({ role, allowedHrefs }: { role: Role; allowe
         )}
       >
         <div className="mb-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">NexTech EHR</p>
+          <div className="flex items-start justify-between gap-2">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">NexTech EHR</p>
+            <span className="rounded-full border bg-white/80 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-foreground">
+              {role}
+            </span>
+          </div>
           <h1 className="mt-2 text-xl font-semibold">{theme.name}</h1>
         </div>
         <nav className="space-y-1">
