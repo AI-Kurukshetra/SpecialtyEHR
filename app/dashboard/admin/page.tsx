@@ -1,16 +1,7 @@
-import { Activity, Building2, CreditCard, KeyRound, Settings, ShieldCheck, Users } from "lucide-react";
+import { KeyRound } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { requirePermission } from "@/lib/auth/guards";
-
-const adminNav = [
-  { id: "users", label: "Manage Users", icon: Users },
-  { id: "roles", label: "Roles & Permissions", icon: ShieldCheck },
-  { id: "clinics", label: "Clinic Locations", icon: Building2 },
-  { id: "analytics", label: "System Analytics", icon: Activity },
-  { id: "billing", label: "Billing Overview", icon: CreditCard },
-  { id: "settings", label: "System Settings", icon: Settings }
-];
 
 const analyticsCards = [
   { label: "Total users", value: "214", trend: "+8% this month" },
@@ -75,30 +66,7 @@ export default async function AdminDashboardPage() {
         </p>
       </section>
 
-      <section className="grid gap-4 lg:grid-cols-[240px_1fr]">
-        <Card className="h-fit lg:sticky lg:top-4">
-          <CardHeader className="pb-3">
-            <CardTitle className="text-lg">Admin Navigation</CardTitle>
-            <CardDescription>Jump to each management area</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-1">
-            {adminNav.map((item) => {
-              const Icon = item.icon;
-              return (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  className="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-foreground hover:bg-muted"
-                >
-                  <Icon className="h-4 w-4 text-primary" />
-                  {item.label}
-                </a>
-              );
-            })}
-          </CardContent>
-        </Card>
-
-        <div className="space-y-4">
+      <section className="space-y-4">
           <section id="analytics" className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {analyticsCards.map((metric) => (
               <Card key={metric.label}>
@@ -122,17 +90,33 @@ export default async function AdminDashboardPage() {
                   <span>Last 7 days</span>
                   <span>Peak: {maxWeeklyActiveUsers}</span>
                 </div>
-                <div className="flex h-44 items-end gap-2 rounded-xl border bg-muted/20 p-3">
-                  {weeklyActiveUsers.map((value, idx) => (
-                    <div key={`${value}-${idx}`} className="flex flex-1 flex-col items-center gap-2">
-                      <span className="text-[10px] font-semibold text-muted-foreground">{value}</span>
-                      <div
-                        className="w-full min-h-[10px] rounded-md bg-[hsl(var(--primary))]"
-                        style={{ height: `${Math.max(Math.round((value / maxWeeklyActiveUsers) * 100), 12)}%` }}
-                      />
-                      <span className="text-[11px] text-muted-foreground">D{idx + 1}</span>
+                <div className="rounded-xl border bg-muted/20 p-4">
+                  <div className="relative h-40">
+                    <div className="absolute inset-0 grid grid-rows-4">
+                      <div className="border-b border-dashed border-border/80" />
+                      <div className="border-b border-dashed border-border/80" />
+                      <div className="border-b border-dashed border-border/80" />
+                      <div className="border-b border-dashed border-border/80" />
                     </div>
-                  ))}
+                    <div className="absolute inset-0 flex items-end gap-3">
+                      {weeklyActiveUsers.map((value, idx) => (
+                        <div key={`${value}-${idx}`} className="flex h-full flex-1 flex-col items-center justify-end gap-2">
+                          <span className="text-[11px] font-semibold text-muted-foreground">{value}</span>
+                          <div
+                            className="w-full rounded-md bg-[hsl(var(--primary))]"
+                            style={{ height: `${Math.max(Math.round((value / maxWeeklyActiveUsers) * 100), 12)}%` }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="mt-3 flex gap-3">
+                    {weeklyActiveUsers.map((_, idx) => (
+                      <span key={`label-${idx}`} className="flex-1 text-center text-[11px] text-muted-foreground">
+                        D{idx + 1}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -306,7 +290,6 @@ export default async function AdminDashboardPage() {
               </CardContent>
             </Card>
           </section>
-        </div>
       </section>
     </main>
   );
